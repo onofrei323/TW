@@ -9,8 +9,8 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy requirements and install Python dependencies
-COPY pyproject.toml uv.lock ./
-RUN pip install --no-cache-dir -r <(python -c "import tomllib; print('\n'.join([f'{k}=={v}' for k, v in tomllib.load(open('pyproject.toml', 'rb'))['project']['dependencies']]))")
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy application code
 COPY . .
